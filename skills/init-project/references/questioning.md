@@ -36,6 +36,8 @@ A vague OVERVIEW.md forces every downstream session to guess. The cost compounds
 
 **Clarify ambiguity.** "When you say Z, do you mean A or B?" "You mentioned X — tell me more."
 
+**Push back on the reasoning, not just the vagueness.** When a consequential choice looks driven by fear, avoidance, or convenience rather than reasoning, name that and press on it before accepting — don't validate the feeling and move on. If the user overrides something you suggested, ask what's behind it. Reserve this for choices that shape the project; routine answers don't need a challenge. This is about their reasoning, never their skills (see anti-patterns).
+
 **Know when to stop.** When you understand what they want, why they want it, who it's for, and what done looks like — offer to proceed.
 
 </how_to_question>

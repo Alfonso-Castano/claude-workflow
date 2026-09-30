@@ -85,6 +85,8 @@ Result:
     state.md
 ```
 
+For `/init-project --thorough` (optional deeper brainstorm), also copy `skills/feature/references/thorough-brainstorm.md` to `~/.claude/skills/feature/references/thorough-brainstorm.md`. `install.sh` does this automatically.
+
 ## 2. The subagents
 
 Copy the three files from `agents/` to:
@@ -184,6 +186,8 @@ Tell it what you want to build. It classifies the request:
 - **Everything else** → routes to the full loop: `/feature-discuss` → `/feature-plan` → `/feature-execute` → `/feature-verify`, run one at a time, in that order. Each writes its output to `.context/features/NNN-slug/` and tells you the next command.
 
 You can also invoke any of these directly if you already know which stage you're at (e.g. `/feature-plan --thorough` if you know a feature touches unfamiliar territory and want a fuller research pass before decomposition).
+
+`/feature-discuss --thorough` and `/init-project --thorough` opt in to a deeper brainstorm: widen the problem (distinct framings, the strongest case against your current leaning, a short pre-mortem), narrow to 2–3 approaches with a recommendation, and you choose. The chosen approach and the rejected alternatives are recorded. It's inline and adds no subagents, but it does add a round of discussion, so leave it off for simple work — without the flag both skills run as before. The shared logic lives in `skills/feature/references/thorough-brainstorm.md`.
 
 ### What it produces
 

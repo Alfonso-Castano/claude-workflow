@@ -1,12 +1,14 @@
 ---
 name: init-project
-description: Initialize a new project from a rough idea. Deep interrogation, optional domain research, and a roadmap if needed — writes durable context to .context/ that every future session and skill reads from. One-time, whole-project setup — not for individual features within an already-initialized project.
+description: Initialize a new project from a rough idea. Deep interrogation, optional domain research, and a roadmap if needed — writes durable context to .context/ that every future session and skill reads from. One-time, whole-project setup — not for individual features within an already-initialized project. Supports --thorough for a deeper brainstorm of the project's shape before it is written up.
 disable-model-invocation: true
 allowed-tools: Read, Write, Bash, Agent, AskUserQuestion
 ---
 
 <runtime_note>
 This skill is explicit-invocation only (`/init-project`). It never auto-triggers — `disable-model-invocation: true` in the frontmatter enforces that. This is deliberate: initialization is a one-time, deliberate action, not something that should fire on an ambiguous "I have an idea for..." remark.
+
+Accepts an optional `--thorough` flag, which adds a deeper brainstorm to Step 2. Without it, the skill runs exactly as described below.
 </runtime_note>
 
 <objective>
@@ -30,6 +32,8 @@ This skill directory bundles:
 - `references/spec-review.md` — the fresh-context self-review step
 - `templates/overview.md`, `templates/roadmap.md`, `templates/decisions.md`, `templates/state.md` — output file templates
 
+Only with `--thorough`, also read `~/.claude/skills/feature/references/thorough-brainstorm.md` (shared with `/feature-discuss`).
+
 Subagents used (defined in `~/.claude/agents/`): `context-researcher`, `context-research-synthesizer`, `context-roadmapper`.
 </execution_context>
 
@@ -52,6 +56,8 @@ Follow `references/questioning.md` in full — the philosophy, the freeform rule
 Open with, inline and freeform (NOT AskUserQuestion): **"What do you want to build?"**
 
 Follow the thread from there. Loop until the reference file's decision gate is accepted.
+
+**With `--thorough`:** once you understand the idea well enough to write the overview, but **before** offering the decision gate, run the block from `thorough-brainstorm.md` (widen → narrow to 2–3 approaches → the user chooses) on the project's shape, following its "Applied to `/init-project`" section. If the user's choice reopens the idea, keep questioning; offer the decision gate only once the chosen approach is settled. Without the flag, skip this entirely.
 
 ## 3. Write OVERVIEW.md
 
@@ -111,6 +117,8 @@ Use AskUserQuestion after presenting:
 ## 7. Write DECISIONS.md and STATE.md
 
 Using `templates/decisions.md`: seed with whatever decisions actually came up during questioning (technical preferences stated unprompted, explicit exclusions with reasoning). An empty or near-empty seed is fine and correct if nothing beyond scope was actually decided.
+
+If `--thorough` ran, include an entry for the chosen approach that also records the alternatives that were rejected and why (see `thorough-brainstorm.md`). Only record what the user actually chose.
 
 Using `templates/state.md`: write Current Position and Next Action. Next Action should name Phase 1 if a roadmap exists, or the core value from OVERVIEW.md if it doesn't.
 

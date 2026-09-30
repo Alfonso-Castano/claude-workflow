@@ -9,6 +9,9 @@ mkdir -p ~/.claude/skills ~/.claude/agents
 
 install_init_project() {
   cp -r "$TMP_DIR/skills/init-project" ~/.claude/skills/
+  # /init-project --thorough reads this shared file, which lives under feature/ so /feature-discuss can share it
+  mkdir -p ~/.claude/skills/feature/references
+  cp "$TMP_DIR/skills/feature/references/thorough-brainstorm.md" ~/.claude/skills/feature/references/
   cp "$TMP_DIR/agents/context-researcher.md" "$TMP_DIR/agents/context-research-synthesizer.md" "$TMP_DIR/agents/context-roadmapper.md" ~/.claude/agents/
   echo "✅ init-project skill and agents installed to ~/.claude/"
 }
