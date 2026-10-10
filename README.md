@@ -1,6 +1,14 @@
-# Installing /init-project
+# Claude Code workflow kit
 
-Repo: https://github.com/Alfonso-Castano/claude-init-project
+The agent workflow I use on my own projects: 10 Claude Code skills, 7 subagents, and a hook, installable in one line.
+
+- **`/init-project`** sets up a project's context files (`.context/`: overview, decisions, state, and a roadmap if one is needed), with optional research subagents.
+- **`/update-context`** keeps those files current as work happens, with a session-start hook that warns when they go stale.
+- **The feature loop** (`/feature`, then discuss, plan, execute, verify) runs each task in a fresh subagent, so long sessions don't degrade, and nothing is marked done without fresh verification evidence. Small tasks take a fast path (`/feature-quick`).
+
+## Installing
+
+Repo: https://github.com/Alfonso-Castano/claude-workflow
 
 ## Foundational CLAUDE.md
 
@@ -13,37 +21,37 @@ This repo has three independently-installable pieces: **`/init-project`** (one-t
 **`/init-project` only** (default — no argument needed):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash
 ```
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash
+Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash
 ```
 
 **`/update-context` only:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- context-update
+curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- context-update
 ```
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- context-update
+Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- context-update
 ```
 
 **`feature-workflow` only:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- feature-workflow
+curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- feature-workflow
 ```
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- feature-workflow
+Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- feature-workflow
 ```
 
 **All three:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- all
+curl -fsSL https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- all
 ```
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-init-project/main/install.sh | bash -s -- all
+Invoke-RestMethod https://raw.githubusercontent.com/Alfonso-Castano/claude-workflow/main/install.sh | bash -s -- all
 ```
 
 Each installs its own skill/agent files to `~/.claude/` in one step. Details on what gets installed and how below.
@@ -59,7 +67,7 @@ git init
 git add .
 git commit -m "init-project skill: initial version"
 git branch -M main
-git remote add origin https://github.com/Alfonso-Castano/claude-init-project.git
+git remote add origin https://github.com/Alfonso-Castano/claude-workflow.git
 git push -u origin main
 ```
 
@@ -209,7 +217,7 @@ After a feature passes `/feature-verify`, it suggests merging the feature branch
 
 Once step 0 is pushed, you never need these local files again. On any machine, in any Claude Code session (terminal or IDE), just say:
 
-> Clone https://github.com/Alfonso-Castano/claude-init-project and install it: copy `skills/init-project` into `~/.claude/skills/` and everything in `agents/` into `~/.claude/agents/`.
+> Clone https://github.com/Alfonso-Castano/claude-workflow and install it: copy `skills/init-project` into `~/.claude/skills/` and everything in `agents/` into `~/.claude/agents/`.
 
 Claude Code has git and bash access by default and will do this itself — no scripts to run by hand. You only need to say this once per machine; after that `~/.claude/` already has it and every project picks it up automatically.
 

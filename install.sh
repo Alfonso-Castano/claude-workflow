@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-REPO_URL="https://github.com/Alfonso-Castano/claude-init-project.git"
+REPO_URL="https://github.com/Alfonso-Castano/claude-workflow.git"
 COMPONENT="${1:-init-project}"
 
 TMP_DIR=$(mktemp -d)
